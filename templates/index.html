@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <a href="{% url 'todos:todo_create' %}"> create todo </a>
+    {% if request.user.is_authenticated %}
+        hello {{ request.user.username }}
+    {% else %}
+        hello anynomus 
+    {% endif %}
+    {% for todo in todos %}
+      <li><a href="{% url 'todos:todo_detail' todo.id %}"> {{ todo.name }} it's due date {{ todo.due_date }} </li> </a> 
+      <a href="{% url 'todos:todo_update' todo.id %}">update </a>
+      <a href="{% url 'todos:todo_delete' todo.id %}">Delete </a>
+    {% endfor %}
+{% endblock content %}
+
